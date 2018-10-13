@@ -1,2 +1,2 @@
-# supervisor
-A basic Supervisor image
+# docker-base
+A basic image
