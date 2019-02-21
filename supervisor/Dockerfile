@@ -1,34 +1,34 @@
-#基础镜像来自：centos7
-FROM centos:centos7
+#基础镜像来自：ubuntu
+FROM ubuntu:16.04
 
 # 维护者信息
-MAINTAINER VincentHQL <229323147@qq.com>
-
-
-RUN \
-  rpm --rebuilddb && yum clean all && \
-  yum install -y epel-release && \
-  yum update -y && \
-  yum install -y \
-                  iproute \
-                  python-setuptools \
-                  hostname \
-                  inotify-tools \
-                  yum-utils \
-                  which \
-                  jq \
-                  rsync && \
-  yum clean all && \
-  easy_install supervisor
+LABEL VincentHQL <229323147@qq.com>
 
 # Add supervisord conf, bootstrap.sh files
 COPY container-files /
 
-ENTRYPOINT ["/config/bootstrap.sh"]
+RUN \
+  apt-get autoclean && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y \
+                  curl \
+                  wget \
+                  iproute \
+                  net-tools \
+                  hostname \
+                  cron \
+                  software-properties-common \
+                  inotify-tools \
+                  rsync \
+                  python-pip && \
+  rm -rf /var/lib/apt/lists/* && \
+  pip install supervisor
 
+ENTRYPOINT ["/config/bootstrap.sh"]
 
 ###############################################构建脚本####################################
 # 构建image镜像
-# docker build --tag=global/docker-supervisor .
+# docker build --tag=vincenthql/supervisor .
 
-# docker run -it global/docker-supervisor
+# docker run -it vincenthql/supervisor
