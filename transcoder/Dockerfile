@@ -1,11 +1,11 @@
 FROM openjdk:8-jdk-alpine
 
 RUN apk add --no-cache \
-        python2.7 \
+        bash \
+        build-base \
+        python-dev \
         curl \
-        wget \
         ffmpeg
-
 
 
 
