@@ -5,7 +5,8 @@ RUN apk add --no-cache \
         build-base \
         python-dev \
         curl \
-        ffmpeg
+        ffmpeg \
+        py-pip
 
-
-
+RUN \
+    pip install --upgrade b2
