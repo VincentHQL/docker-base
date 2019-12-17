@@ -8,7 +8,7 @@ RUN apk add --no-cache \
         curl \
         ffmpeg \
         py-pip
-COPY tweb-0.3.2.tar.gz /tmp
+COPY transcoder/tweb-0.3.2.tar.gz /tmp
 RUN \
     pip install --upgrade b2 && \
     pip install /tmp/tweb-0.3.2.tar.gz && \
